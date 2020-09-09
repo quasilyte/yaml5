@@ -51,6 +51,9 @@ func (c *checker) visitNode(n ast.Node) {
 	case *ast.LiteralNode:
 		c.warn(n, "literal block scalar '%s' should not be used", n.Start.Value)
 
+	case *ast.DirectiveNode:
+		c.warn(n, "remove %s directive", n.Value)
+		c.visitNode(n.Value)
 	case *ast.AliasNode:
 		c.warn(n, "remove %s alias", n.Value)
 		c.visitNode(n.Value)
@@ -102,7 +105,7 @@ func (c *checker) visitFile(f *ast.File) {
 
 func (c *checker) visitString(s *ast.StringNode, isKey bool) {
 	switch c.getParent(1).(type) {
-	case *ast.AnchorNode, *ast.AliasNode:
+	case *ast.AnchorNode, *ast.AliasNode, *ast.DirectiveNode:
 		return
 	}
 

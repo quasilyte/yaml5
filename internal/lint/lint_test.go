@@ -8,6 +8,18 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
+func TestDirective(t *testing.T) {
+	test := newSuite(t)
+	test.yaml = `%YAML 1.1
+---
+{}`
+	test.want = []string{
+		"3:1: found more than one document inside a file",
+		"1:1: remove YAML 1.1 directive",
+	}
+	runLintTest(test)
+}
+
 func TestAnchorAndAlias(t *testing.T) {
 	test := newSuite(t)
 	test.yaml = `{
