@@ -7,7 +7,7 @@ This repository provides a useful tooling for you:
 * `yaml5 lint` checks whether the YAML file complies with the YAML5 rules
 * `yaml5 fmt` reads a YAML file and pretty-prints it as a YAML5 file (not implemented yet)
 
-## YAML5 rules
+## YAML5 rules (tl;dr: it's JSON5 with a different comment syntax)
 
 There is only one rule: your YAML file needs to be a valid JSON5 document.
 
