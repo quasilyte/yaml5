@@ -54,7 +54,16 @@ bad.yml:2:5: infinity value should not be used
 ## Installation
 
 ```bash
+# The easiest way to build it from sources:
 go get -u -v github.com/quasilyte/yaml5/cmd/yaml5
+
+# Build yaml5 binary from sources + embed the version info so the "yaml5 version"
+# can give an appropriate output. Note that GOBIN folder is set to the
+# current directory (the cloned yaml5 repository in this example); you can
+# choose any other binary destination.
+git clone https://github.com/quasilyte/yaml5.git
+cd yaml5
+GOBIN=$(pwd) make
 ```
 
 > TODO: make a binary release.
