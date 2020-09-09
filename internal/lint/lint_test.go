@@ -84,15 +84,28 @@ func TestMultiDoc(t *testing.T) {
 	runLintTest(test)
 }
 
-func TestKeyValOutsideObj(t *testing.T) {
+func TestKeyValOutsideObj1(t *testing.T) {
 	test := newSuite(t)
 	test.yaml = `foo: [
-  bar: 1
+  bar: 1,
+  baz: 2,
 ]
 `
 	test.want = []string{
 		"1:4: used a key-value outside of an object",
 		"2:6: used a key-value outside of an object",
+		"3:6: used a key-value outside of an object",
+	}
+	runLintTest(test)
+}
+
+func TestKeyValOutsideObj2(t *testing.T) {
+	test := newSuite(t)
+	test.yaml = `bar: 1
+baz: 2
+`
+	test.want = []string{
+		"1:4: use a flow object syntax {} instead",
 	}
 	runLintTest(test)
 }
@@ -104,7 +117,7 @@ func TestNonFlowArray(t *testing.T) {
     - 1
     - 2
 }`
-	test.want = []string{"3:5: use a flow array syntax instead"}
+	test.want = []string{"3:5: use a flow array syntax [] instead"}
 	runLintTest(test)
 }
 
@@ -196,14 +209,16 @@ education: |
     3 A-Levels
     BSc in the Internet of Things`
 	test.want = []string{
+		"2:5: use a flow object syntax {} instead",
 		"2:7: unquoted strings are not allowed",
 		"3:6: unquoted strings are not allowed",
 		"4:8: unquoted strings are not allowed",
-		"7:5: use a flow array syntax instead",
+		"7:5: use a flow array syntax [] instead",
 		"7:7: unquoted strings are not allowed",
 		"8:7: unquoted strings are not allowed",
 		"9:7: unquoted strings are not allowed",
 		"10:7: unquoted strings are not allowed",
+		"12:9: use a flow object syntax {} instead",
 		"12:11: unquoted strings are not allowed",
 		"13:13: unquoted strings are not allowed",
 		"14:13: unquoted strings are not allowed",

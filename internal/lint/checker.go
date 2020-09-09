@@ -67,7 +67,7 @@ func (c *checker) visitNode(n ast.Node) {
 
 	case *ast.SequenceNode:
 		if !n.IsFlowStyle {
-			c.warn(n, "use a flow array syntax instead")
+			c.warn(n, "use a flow array syntax [] instead")
 		}
 		for _, v := range n.Values {
 			c.visitNode(v)
@@ -87,6 +87,9 @@ func (c *checker) visitNode(n ast.Node) {
 		c.warn(n, "don't use ?-style complex mapping key")
 
 	case *ast.MappingNode:
+		if !n.IsFlowStyle {
+			c.warn(n, "use a flow object syntax {} instead")
+		}
 		for _, v := range n.Values {
 			c.visitNode(v)
 		}
