@@ -83,6 +83,9 @@ func (c *checker) visitNode(n ast.Node) {
 		c.visitObjectKey(n.Key)
 		c.visitNode(n.Value)
 
+	case *ast.MappingKeyNode:
+		c.warn(n, "don't use ?-style complex mapping key")
+
 	case *ast.MappingNode:
 		for _, v := range n.Values {
 			c.visitNode(v)

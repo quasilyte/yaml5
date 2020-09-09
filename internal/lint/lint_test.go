@@ -8,6 +8,19 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
+func TestMappingKey(t *testing.T) {
+	test := newSuite(t)
+	test.yaml = `{
+  ? [1, 2]: "y",
+  ? true : 'a',
+}`
+	test.want = []string{
+		"2:3: don't use ?-style complex mapping key",
+		"3:3: don't use ?-style complex mapping key",
+	}
+	runLintTest(test)
+}
+
 func TestDirective(t *testing.T) {
 	test := newSuite(t)
 	test.yaml = `%YAML 1.1
