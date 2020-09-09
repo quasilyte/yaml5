@@ -1,6 +1,6 @@
 # YAML5 - a JSON5* that is as widespread as YAML
 
-YAML5 is a way of writing YAML files that makes them look like JSON5. In other words: it's not a new format.
+[YAML5](https://github.com/quasilyte/yaml5) is a way of writing [YAML](https://yaml.org/) files that makes them look like [JSON5](https://json5.org/). In other words: it's not a new format.
 
 This repository provides a useful tooling for you:
 
@@ -30,9 +30,7 @@ No \\n's!",
 }
 ```
 
-The only thing I've changed is `// -> #`, everything else is already identical.
-
-The `yaml5 lint` tool does catch some corner cases, for example, it does check that you use a valid unquoted object keys following the `ES5.1` rules.
+The `yaml5 lint` tool does catch some corner cases, for example, it does check that you've used a valid unquoted object key following the `ES5.1` rules.
 
 All YAML documents that use features that are not part of the JSON5 format will be reported as errors:
 
